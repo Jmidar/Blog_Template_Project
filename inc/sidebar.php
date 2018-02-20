@@ -9,7 +9,7 @@
 						if($catpost){
 							while ($catresult = $catpost->fetch_assoc()){
 					?>
-						<li><a href="sidebar.php?Category=<?php echo $catresult['id']; ?>"><?php echo $catresult['name']; ?></a></li>
+						<li><a href="posts.php?category=<?php echo $catresult['id']; ?>"><?php echo $catresult['name']; ?></a></li>
 						
 						<?php }}else{ ?>
 								<li>No Category list</li>
