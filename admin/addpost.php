@@ -25,7 +25,7 @@
                  $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
                  $uploaded_image = "Upload/".$unique_image;
 
-                 if ($title = "" || $cat = "" || $body = "" || $tags = "" || $author = "" || $file_name = ""){
+                 if ($title == "" || $cat == "" || $body == "" || $tags == "" || $author == "" || $file_name == ""){
 
                     echo "<span style='color: red;font-size: 18px;'>Field must not be Empty...!!!</span>";
                  }elseif ($file_size >1048567) {
@@ -36,16 +36,16 @@
                         .implode(', ', $permited)."</span>";
                  } else{
                       move_uploaded_file($file_temp, $uploaded_image);
-                      $query = "INSERT INTO tbl_post(`cat`, `title`, `body`, `image`, `author`, `tags`) VALUES('$cat', '$title', '$body', '$uploaded_image', '$author', '$tags')";
-                      var_dump($query);
-                      /*$inserted_rows = $db->insert($query);
+                      $query = "INSERT INTO tbl_post(cat, title, body, image, author, tags) VALUES('$cat', '$title', '$body', '$uploaded_image', '$author', '$tags')";
+                      //var_dump($query);
+                      $inserted_rows = $db->insert($query);
                       if ($inserted_rows) {
                       echo "<span class='success'>Post Inserted Successfully.
                       </span>";
                       }else {
                            echo "<span class='error'>Post Not Inserted !</span>";
                            }
-                   */ } 
+                    } 
                 }
              ?>
                 <div class="block">               
