@@ -24,9 +24,7 @@
 					<tbody>
 
 				   <?php
-                  	$query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post 
-                  	INNER JOIN tbl_category tbl_post.cat = tbl_category.id
-                  	ORDER By tbl_post.title desc";
+                  	$query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post INNER JOIN tbl_category ON tbl_post.cat = tbl_category.id ORDER By tbl_post.title desc";
                   	$post = $db->select($query);
                   	if ($post){
                   		$i = 0;
@@ -44,7 +42,9 @@
 							<td><?php echo $result['author']; ?></td>
 							<td><?php echo $result['tags']; ?></td>
 							<td><?php echo $fm->formatDate($result['date']); ?></td>
-							<td><a href="">Edit</a> || <a href="">Delete</a></td>
+							<td><a href="editpost.php?eidtid=<?php echo $result['id']; ?>">Edit</a> 
+								|| <a onclick="return confirm('are you sure...???');"
+								 href="delpost.php?delid=<?php echo $result['id']; ?>">Delete</a></td>
 						</tr>
 				   <?php } } ?>
 
@@ -63,4 +63,4 @@
         });
     </script>
     
-<?php include 'inc/footer' ?>
+<?php include 'inc/footer.php' ?>
