@@ -35,16 +35,16 @@
 					
 						<tr class="odd gradeX">
 							<td><?php echo $i; ?></td>
-							<td><?php echo $result['title']; ?></td>
+							<td><a href="editpost.php?eidtpostid=<?php echo $result['id']; ?>"><?php echo $result['title']; ?></a></td>
 							<td><?php echo $fm->textShorten($result['body'],100); ?></td>
 							<td><?php echo $result['name']; ?></td>
 							<td><img src="<?php echo $result['image']; ?>" height="40px"; width="60px"; /></td>
 							<td><?php echo $result['author']; ?></td>
 							<td><?php echo $result['tags']; ?></td>
 							<td><?php echo $fm->formatDate($result['date']); ?></td>
-							<td><a href="editpost.php?eidtid=<?php echo $result['id']; ?>">Edit</a> 
-								|| <a onclick="return confirm('are you sure...???');"
-								 href="delpost.php?delid=<?php echo $result['id']; ?>">Delete</a></td>
+							<td><a href="editpost.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
+								|| <a onclick="return confirm('Are you sure to Delete...???');"
+								 href="delpost.php?delpostid=<?php echo $result['id']; ?>">Delete</a></td>
 						</tr>
 				   <?php } } ?>
 

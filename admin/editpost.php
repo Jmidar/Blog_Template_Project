@@ -6,6 +6,7 @@
         //header("Location:catlist.php");
     } else{
         $postid = $_GET['editpostid'];
+        //var_dump($postid);
     }
 ?>
         <div class="grid_10">
@@ -56,12 +57,14 @@
                 }
              ?>
                 <div class="block">
-            <?php
-                $query = "select * from tbl_post where id='postid' ORDER BY id desc";
-                $getpost = $db->select($query);
-                  while ($result = $getpost->fetch_assoc()) {
-                  
-            ?>               
+       <?php
+         $query = "SELECT * FROM tbl_post where id=$postid ORDER BY id desc";
+         //var_dump($query);
+         $getpost = $db->select($query);
+              //var_dump($getpost);   
+         while ($postresult = $getpost->fetch_assoc()) {
+                  //var_dump($postresult);
+       ?>               
                  <form action="" method="post" enctype="multipart/form-data">
                     <table class="form">
                        
@@ -70,7 +73,7 @@
                                 <label>Title</label>
                             </td>
                             <td>
-                                <input type="text" value="<?php echo $result['title']?>" class="medium" />
+                                <input type="text" value="<?php echo $postresult['title']; ?>" class="medium" />
                             </td>
                         </tr>
                      
@@ -88,7 +91,10 @@
                                     while ($result = $category->fetch_assoc()) {
                                          
                               ?>
-                                    <option value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
+                                    <option 
+                                  <?php if($postresult['cat'] == $result['id']){ ?>
+                                      Selected = "Selected"
+                                  <?php } ?> value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
                               <?php  } } ?>
                                 </select>
                             </td>
@@ -99,7 +105,8 @@
                                 <label>Upload Image</label>
                             </td>
                             <td>
-                                <input type="file" name="image" value="<?php echo $result['image']; ?>" />
+                                <img src="<?php echo $postresult['image']; ?>" height="150px" width="200px" /><br>
+                                <input type="file" name="image" />
                             </td>
                         </tr>
                         <tr>
@@ -108,7 +115,7 @@
                             </td>
                             <td>
                                 <textarea class="tinymce" name="body" >
-                                  <?php echo $result['body']; ?>
+                                  <?php echo $postresult['body']; ?>
                                 </textarea>
                             </td>
                         </tr>
@@ -117,7 +124,8 @@
                                 <label>Tags</label>
                             </td>
                             <td>
-                                <input type="text" name="tags" value="<?php echo $result['tags']; ?>" class="medium" />
+                                <input type="text" name="tags" 
+                                value="<?php echo $postresult['tags']; ?>" class="medium" />
                             </td>
                         </tr>
                         <tr>
@@ -125,7 +133,8 @@
                                 <label>Author</label>
                             </td>
                             <td>
-                                <input type="text" name="author" value="<?php echo $result['author']; ?>" class="medium" />
+                                <input type="text" name="author" 
+                                value="<?php echo $postresult['author']; ?>" class="medium" />
                             </td>
                         </tr>
 					             	<tr>
@@ -136,7 +145,7 @@
                         </tr>
                     </table>
                     </form>
-                <?php } ?>
+        <?php } ?>
                 </div>
             </div>
         </div>
@@ -151,4 +160,4 @@
             $('input[type="radio"]').fancybutton();
         });
     </script>
-<?php include 'inc/footer' ?>
+<?php include 'inc/footer.php' ?>
