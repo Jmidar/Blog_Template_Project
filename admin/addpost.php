@@ -135,4 +135,4 @@
             $('input[type="radio"]').fancybutton();
         });
     </script>
-<?php include 'inc/footer' ?>
+<?php include 'inc/footer.php' ?>

@@ -5,7 +5,7 @@
     <div class="grid_10">		
         <div class="box round first grid">
             <h2>Update Social Media</h2>
-        <?php
+    <?php
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -39,7 +39,7 @@
                      }
                 }
         }
-        ?>
+    ?>
             <div class="block">         
         <?php
         $query = "SELECT * FROM tbl_social";
@@ -99,4 +99,4 @@
     </div>
 
 
-<?php include 'inc/footer' ?>
+<?php include 'inc/footer.php' ?>
