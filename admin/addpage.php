@@ -60,7 +60,7 @@
 						            <tr>
                             <td></td>
                             <td>
-                                <input type="submit" name="submit" Value="Save" />
+                                <input type="submit" name="submit" Value="Create" />
                             </td>
                         </tr>
                     </table>

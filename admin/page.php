@@ -8,6 +8,10 @@
         $id = $_GET['pageid'];
     }
 ?>
+<style>
+.actiondel{margin-left: 10px;}
+.actiondel a{background: #f0f0f0 none repeat scroll 0 0; border: 1px solid #ddd; color: #444; cursor: pointer; font-size: 20px; font-weight: normal; padding: 4px 10px;}
+</style>
 
     <div class="grid_10">
 
@@ -42,7 +46,7 @@
                 } 
             }
          ?>
-            <div class="block"> \
+            <div class="block"> 
   <?php
       $query = "SELECT * FROM tbl_page WHERE id='$id'";
       $pages = $db->select($query);
@@ -77,7 +81,8 @@
 				            <tr>
                         <td></td>
                         <td>
-                            <input type="submit" name="submit" Value="Save" />
+                            <input type="submit" name="submit" Value="Update" />
+                            <spam class="actiondel"><a href="deletepage.php?delpage=<?php echo $result['id']; ?>">Delete</a></spam>
                         </td>
                     </tr>
                 </table>
