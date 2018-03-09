@@ -59,7 +59,7 @@
                    
                     <tr>
                         <td>
-                            <label>Title</label>
+                            <label>Name</label>
                         </td>
                         <td>
                             <input type="text" name="name" value="<?php echo $result['name']; ?>" class="medium" />
