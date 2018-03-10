@@ -24,6 +24,7 @@ class Format{
 	public function title(){
 		$path = $_SERVER['SCRIPT_FILENAME'];
 		$title = basename($path, '.php');
+		//$title = str_repeat('_', ' ', $title); exmp: Contact_us
 		if ($title == 'index'){
 			$title = 'home';
 
