@@ -26,14 +26,24 @@
 		        if ($posts){
 		            while ($result = $posts->fetch_assoc()) { ?>
 		            	<title><?php echo $result['title']; ?> - <?php echo Jmi;?></title>
-
 		     <?php  } } } else{ ?>
 		    <title><?php echo $fm->title();?></title>
 		 <?php } ?>
 	<meta name="language" content="English">
 	<meta name="description" content="It is a website about education">
-	<meta name="keywords" content="blog,cms blog">
-	<meta name="author" content="Delowar">
+  <?php
+  	if(isset($_GET['id'])) {
+  		$keywords = $_GET['id'];
+  		$query = "SELECT * FROM tbl_post where id='$keywords'";
+  		$keywords = $db->SELECT($query);
+  		if($keywords){
+  			while ($result = $keywords->fetch_assoc()) { ?>
+  				<meta name="keywords" content="<?php echo $result['tags']; ?>">
+<?php }	}	}else{ ?>
+		<meta name="keywords" content="<?php echo KEYWORDS;?>">
+<?php  	} ?>
+	
+	<meta name="author" content="JmidarArnab">
 	<link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.css">	
 	<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="style.css">

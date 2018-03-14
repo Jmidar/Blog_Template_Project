@@ -106,7 +106,7 @@
                       $count = mysqli_num_rows($msg);
                       echo "(".$count.")";
                   }else{
-                    echo "()";
+                    echo "(0)";
                   }
             ?>
                 </span></a></li>
@@ -115,4 +115,3 @@
         </div>
         <div class="clear">
         </div>
-        
