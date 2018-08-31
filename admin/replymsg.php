@@ -21,9 +21,9 @@
                 $message = $fm->validation($_POST['message']);
                 $sendmail = mail($to, $subject, $message, $from);
                 if ($sendmail) {
-                  echo "<span color: green>Send Success</span>";
+                  echo "<span style = 'color: green'>Send Success</span>";
                 }else {
-                   echo "<span color: red>Send Success</span>";
+                   echo "<span style = 'color: red'>Send Success</span>";
                 }
             }
          ?>

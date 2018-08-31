@@ -20,10 +20,10 @@
 
 				<h2><a href=" post.php?id=<?php echo $result['id'];?>"><?php echo $result['title'];?></a></h2>
 				<h4><?php echo $fm->formatDate($result['date']); ?>,  By <a href = "#"><?php echo $result['author'];?></a></h4>
-				<img src="Admin/upload/<?php echo $result['image']; ?>" alt="post image"/>
+				<img src="admin/<?php echo $result['image']; ?>" alt="post image"/>
 				<?php echo $result['body']; ?>
 			 
-				
+				<?php echo "\n";?>
 				<div class="relatedpost clear">
 					<h2>Related articles</h2>
 
@@ -36,7 +36,7 @@
 					?>
 
 					<a href="post.php?id=<?php echo $rresult['id'];?>">
-						<img src="Admin/upload/<?php echo $rresult['image']; ?>" alt="post image"/></a>
+						<img src="admin/<?php echo $rresult['image']; ?>" alt="post image"/></a>
 					
 					<?php } }else{ echo "There are no related post Avaiable...!!!"; }?>
 
