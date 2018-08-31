@@ -4,27 +4,28 @@
   $userid = Session::get('userId');
   $userrole = Session::get('userRole');
 ?>
-<div class="grid_10">
- <div class="box round first grid">
-    <h2>Update Profile</h2>
+
+
+  <div class="grid_10">
+
+
+<div class="box round first grid">
+    <h2>Update Post</h2>
  <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $title = mysqli_real_escape_string($db->link, $_POST['title']);
-    $cat = mysqli_real_escape_string($db->link, $_POST['cat']);
-    $body = mysqli_real_escape_string($db->link, $_POST['body']);
-    $tags = mysqli_real_escape_string($db->link, $_POST['tags']);
-    $author = mysqli_real_escape_string($db->link, $_POST['author']);
-
-     $query = "UPDATE tbl_post 
+    $name = mysqli_real_escape_string($db->link, $_POST['name']);
+    $username = mysqli_real_escape_string($db->link, $_POST['username']);
+    $email = mysqli_real_escape_string($db->link, $_POST['email']);
+    $details = mysqli_real_escape_string($db->link, $_POST['details']);
+       $query = "UPDATE tbl_user 
                   set 
-                  cat = '$cat',
-                  title = '$title',
-                  body = '$body',
-                  author = '$author',
-                  tags = '$tags' 
-                  WHERE id = '$postid'";
+                  name = '$name',
+                  username = '$username',
+                  email = '$email',
+                  details = '$details' 
+                  WHERE id = '$userid'";
         //var_dump($query);
         $updated_rows = $db->update($query);
         if ($updated_rows) {
@@ -32,92 +33,68 @@
         }else {
              echo "<span class='error'>Post data Not updated !</span>";
              }
-      }  
+      }
+  
  ?>
-          <div class="block">
+          <div class="block">  
       <?php
-          $query = "select * from tbl_user where id='postid'";
-      ?>             
+      $query = "SELECT * FROM tbl_user WHERE id='$userid' AND role='$userrole'";
+      $getuser = $db->select($query);
+       if ($getuser){
+         while ($result = $getuser->fetch_assoc()) {
+        
+    ?>    
+
            <form action="" method="post" enctype="multipart/form-data">
               <table class="form">
                  
                   <tr>
                       <td>
-                          <label>Title</label>
+                          <label>Name:</label>
                       </td>
                       <td>
-                          <input type="text" name="title" value = "<?php echo $postresult['title']; ?>" class="medium" />
+                          <input type="text" name="name" value = "<?php echo $result['name']; ?>" class="medium" />
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td>
+                          <label>Username:</label>
+                      </td>
+                      <td>
+                          <input type="text" name="username" value = "<?php echo $result['username']; ?>" class="medium" />
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td>
+                          <label>Email:</label>
+                      </td>
+                      <td>
+                          <input type="text" name="email" value = "<?php echo $result['email']; ?>" class="medium" />
                       </td>
                   </tr>
                
                   <tr>
-                      <td>
-                          <label>Category</label>
-                      </td>
-                      <td>
-                          <select id="select" name="cat">
-                              <option>Select Category</option>
-                        <?php
-                          $query = "SELECT * FROM tbl_category";
-                          $category = $db->select($query);
-                           if ($category){
-                              while ($result = $category->fetch_assoc()) {
-                                   
-                        ?>
-                              <option 
-                            <?php 
-                              if($postresult['cat']== $result['id']){
-                             ?> selected = "selected';
-                             <?php } ?>
-                               value="<?php echo $result['id'] ?>"><?php echo $result['name']; ?></option>
-                        <?php  } } ?>
-                          </select>
-                      </td>
-                  </tr>
-             
-                  <tr>
-                      <td>
-                          <label>Upload Image</label>
-                      </td>
-                      <td>
-                          <img src="<?php echo $postresult['image']; ?>" height="80px" wight="200px" />
-                          <input type="file" name="image" />
-                      </td>
-                  </tr>
-                  <tr>
                       <td style="vertical-align: top; padding-top: 9px;">
-                          <label>Content</label>
+                          <label>Details :</label>
                       </td>
                       <td>
-                          <textarea class="tinymce" name="body">
-                              <?php echo $postresult['body']; ?>
+                          <textarea class="tinymce" name="details">
+                              <?php echo $result['details']; ?>
                           </textarea>
                       </td>
                   </tr>
+                 
                   <tr>
-                      <td>
-                          <label>Tags</label>
-                      </td>
-                      <td>
-                          <input type="text" name="tags" value = "<?php echo $postresult['tags']; ?>" class="medium" />
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <label>Author</label>
-                      </td>
-                      <td>
-                          <input type="text" name="author" value = "<?php echo $postresult['author']; ?>" class="medium" />
-                      </td>
-                  </tr>
-      <tr>
                       <td></td>
                       <td>
-                          <input type="submit" name="submit" Value="Save" />
+                          <input type="submit" name="submit" Value="Update" />
                       </td>
                   </tr>
               </table>
               </form>
+    <?php } } ?>
           </div>
       </div>
   </div>

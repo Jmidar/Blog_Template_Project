@@ -23,7 +23,7 @@
 				<img src="admin/<?php echo $result['image']; ?>" alt="post image"/>
 				<?php echo $result['body']; ?>
 			 
-				<?php echo "\n";?>
+				
 				<div class="relatedpost clear">
 					<h2>Related articles</h2>
 
