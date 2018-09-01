@@ -18,15 +18,15 @@
             <div class="box round first grid">
                 <h2>UserList</h2>
             <?php
-            	if (isset($_GET['delcat'])){
-            		$delid = $_GET['delcat'];
-            		$delquery = "DELETE from tbl_category WHERE id='$delid'";
+            	if (isset($_GET['deluser'])){
+            		$delid = $_GET['deluser'];
+            		$delquery = "DELETE from tbl_user WHERE id='$delid'";
             		$deldata = $db->delete($delquery);
 
                     if ($deldata){
-                        echo "<span style='color: green;font-size: 18px;'>Category Deleted Successfully...</span>";
+                        echo "<span style='color: green;font-size: 18px;'>User Deleted Successfully...</span>";
                     } else {
-                        echo "<span style='color: red;font-size: 18px;'>Category not Deleted...!!!</span>";
+                        echo "<span style='color: red;font-size: 18px;'>User not Deleted...!!!</span>";
                     }
             	}
             ?>
@@ -60,11 +60,22 @@
 							<td><?php echo $result['username']; ?></td>
 							<td><?php echo $result['email']; ?></td>
 							<td><?php echo $fm->textShorten($result['details'], 30); ?></td>
-							<td><?php echo $result['role']; ?></td>
+							<td><?php 
+								if ($result['role'] == 0){
+									echo "Admin";
+								}elseif ($result['role'] == 1) {
+									echo "Author";
+								}elseif ($result['role'] == 2){
+									echo "Editor";
+								}
+
+							 ?></td>
 
 
-							<td><a href="editcat.php?catid=<?php echo $result['id']; ?>">Edit</a> 
-								|| <a onclick="return confirm('Are you sure for Delete...!!!')" href="?delcat=<?php echo $result['id']; ?>">Delete</a> </td>
+							<td>
+								<a href="viewuser.php?userid=<?php echo $result['id']; ?>">View</a> 
+								|| <a onclick="return confirm('Are you sure for Delete...!!!')" href="?deluser=<?php echo $result['id']; ?>">Delete</a> 
+							</td>
 						</tr>
 				
 				<?php 	} } ?>
