@@ -32,6 +32,7 @@ $getpost = $db->select($query);
     $body = mysqli_real_escape_string($db->link, $_POST['body']);
     $tags = mysqli_real_escape_string($db->link, $_POST['tags']);
     $author = mysqli_real_escape_string($db->link, $_POST['author']);
+    $userid = mysqli_real_escape_string($db->link, $_POST['userid']);
 
      $permited  = array('jpg', 'jpeg', 'png', 'gif');
      $file_name = $_FILES['image']['name'];
@@ -65,7 +66,8 @@ $getpost = $db->select($query);
                     body = '$body',
                     image = '$uploaded_image',
                     author = '$author',
-                    tags = '$tags' 
+                    tags = '$tags',
+                    userid = '$userid'
                     WHERE id = '$postid'";
           //var_dump($query);
           $updated_rows = $db->update($query);
@@ -83,7 +85,8 @@ $getpost = $db->select($query);
                   title = '$title',
                   body = '$body',
                   author = '$author',
-                  tags = '$tags' 
+                  tags = '$tags',
+                  userid = '$userid' 
                   WHERE id = '$postid'";
         //var_dump($query);
         $updated_rows = $db->update($query);
@@ -167,6 +170,7 @@ $getpost = $db->select($query);
                       </td>
                       <td>
                           <input type="text" name="author" value = "<?php echo $postresult['author']; ?>" class="medium" />
+                          <input type="hidden" readonly name="userid" value="<?php echo Session::get('userId') ?>" class="medium" />
                       </td>
                   </tr>
       <tr>

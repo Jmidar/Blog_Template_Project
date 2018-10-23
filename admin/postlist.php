@@ -35,17 +35,27 @@
 					
 						<tr class="odd gradeX">
 							<td><?php echo $i; ?></td>
-							<td><a href="editpost.php?eidtpostid=<?php echo $result['id']; ?>"><?php echo $result['title']; ?></a></td>
+							<td><?php echo $result['title']; ?></td>
 							<td><?php echo $fm->textShorten($result['body'],100); ?></td>
 							<td><?php echo $result['name']; ?></td>
 							<td><img src="<?php echo $result['image']; ?>" height="40px"; width="60px"; /></td>
 							<td><?php echo $result['author']; ?></td>
 							<td><?php echo $result['tags']; ?></td>
 							<td><?php echo $fm->formatDate($result['date']); ?></td>
-							<td><a href="editpost.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
-								|| <a onclick="return confirm('Are you sure to Delete...???');"
-								 href="delpost.php?delpostid=<?php echo $result['id']; ?>">Delete</a></td>
-						</tr>
+			<td>
+				<a href="viewpost.php?viewpostid=<?php echo $result['id']; ?>">View</a> 
+
+			<?php if (Session::get('userId') == $result['userid'] || Session::get('userRole') == '0') 
+			{ ?>
+				||
+				<a href="editpost.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
+				||		
+
+				<a onclick="return confirm('Are you sure to Delete...???');"
+								 href="delpost.php?delpostid=<?php echo $result['id']; ?>">Delete</a>
+			<?php } ?>
+			</td>
+		</tr>
 				   <?php } } ?>
 
 					</tbody>

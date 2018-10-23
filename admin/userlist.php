@@ -74,7 +74,9 @@
 
 							<td>
 								<a href="viewuser.php?userid=<?php echo $result['id']; ?>">View</a> 
+							  <?php if(Session::get('userRole') == '0'){  ?>
 								|| <a onclick="return confirm('Are you sure for Delete...!!!')" href="?deluser=<?php echo $result['id']; ?>">Delete</a> 
+							  <?php } ?>
 							</td>
 						</tr>
 				

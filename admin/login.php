@@ -24,6 +24,7 @@
 			if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$username = $fm->validation($_POST['username']);
 				$password = $fm->validation(md5($_POST['password']));
+	
 
 				$username = mysqli_real_escape_string($db->link, $username);
 				$password = mysqli_real_escape_string($db->link, $password);
