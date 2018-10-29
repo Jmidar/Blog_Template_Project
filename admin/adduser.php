@@ -16,26 +16,37 @@
 
                 $username = $fm->validation($_POST['username']);
                 $password = $fm->validation(md5($_POST['password']));
+                $email    = $fm->validation($_POST['email']);
                 $role     = $fm->validation($_POST['role']);
 
                 $username = mysqli_real_escape_string($db->link, $username);
                 $password = mysqli_real_escape_string($db->link, $password);
+                $email = mysqli_real_escape_string($db->link, $email);
                 $role = mysqli_real_escape_string($db->link, $role);
                // echo "<span style='color: red;font-size: 18px;'>No Result Found...!!!</span>";
-                if (empty($username) || empty($password) || empty($role)){
+                if (empty($username) || empty($password) || empty($email) || empty($role)){
                     echo "<span style='color: red;font-size: 18px;'>Your Field is Empty...!!!</span>";
-                } else {
-                    $query = "INSERT INTO tbl_user(username, password, role) 
-                                VALUES('$username', '$password', '$role')";
-                    $adduser = $db->insert($query);
+                }else{
 
-                    if ($adduser){
-                        echo "<span style='color: green;font-size: 18px;'>User Created Successfully...</span>";
-                    } else {
-                        echo "<span style='color: red;font-size: 18px;'>User Created not inserted...!!!</span>";
+                    $mailquery = "select * from tbl_user WHERE email='$email' limit 1";
+                    $mailcheck = $db->select($mailquery);
+                    if ($mailcheck != false) {
+                     echo "<span class='error'>Email already Exist...!!!</span>";
                     }
-                }
 
+                    else {
+                        $query = "INSERT INTO tbl_user(username, password, email, role) 
+                                VALUES('$username', '$password', '$email', '$role')";
+                        $adduser = $db->insert($query);
+
+                        if ($adduser){
+                            echo "<span style='color: green;font-size: 18px;'>User Created Successfully...</span>";
+                         } else {
+                        echo "<span style='color: red;font-size: 18px;'>User Created not inserted...!!!</span>";
+                        }
+                     }
+
+                }
             }
         ?>
                  <form action="" method="post">
@@ -56,6 +67,15 @@
 
                             <td>
                                 <input type="text" name="password" placeholder="Enter Password..." class="medium" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Email: </label>
+                            </td>
+
+                            <td>
+                                <input type="text" name="email" placeholder="Enter Valid Email..." class="medium" />
                             </td>
                         </tr>
                         <tr>
