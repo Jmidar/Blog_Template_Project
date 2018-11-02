@@ -10,68 +10,10 @@
 <html>
 <head>
 
-	<?php
-		if (isset($_GET['pageid'])){
-			$pagetitleid = $_GET['pageid'];			
-		    $query = "SELECT * FROM tbl_page WHERE id='$pagetitleid'";
-		    $pages = $db->select($query);
-		        if ($pages){
-		            while ($result = $pages->fetch_assoc()) { ?>
-		            	<title><?php echo $result['name']; ?> - <?php echo Jmi;?></title>
-
-		     <?php  } } }elseif (isset($_GET['id'])){
-			$posttitleid = $_GET['id'];			
-		    $query = "SELECT * FROM tbl_post WHERE id='$posttitleid'";
-		    $posts = $db->select($query);
-		        if ($posts){
-		            while ($result = $posts->fetch_assoc()) { ?>
-		            	<title><?php echo $result['title']; ?> - <?php echo Jmi;?></title>
-		     <?php  } } } else{ ?>
-		    <title><?php echo $fm->title();?></title>
-		 <?php } ?>
-	<meta name="language" content="English">
-	<meta name="description" content="It is a website about education">
-  <?php
-  	if(isset($_GET['id'])) {
-  		$keywords = $_GET['id'];
-  		$query = "SELECT * FROM tbl_post where id='$keywords'";
-  		$keywords = $db->SELECT($query);
-  		if($keywords){
-  			while ($result = $keywords->fetch_assoc()) { ?>
-  				<meta name="keywords" content="<?php echo $result['tags']; ?>">
-<?php }	}	}else{ ?>
-		<meta name="keywords" content="<?php echo KEYWORDS;?>">
-<?php  	} ?>
 	
-	<meta name="author" content="JmidarArnab">
-	<link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.css">	
-	<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="lol.css">
-	<script src="js/jquery.js" type="text/javascript"></script>
-	<script src="js/jquery.nivo.slider.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-$(window).load(function() {
-	$('#slider').nivoSlider({
-		effect:'random',
-		slices:10,
-		animSpeed:500,
-		pauseTime:5000,
-		startSlide:0, //Set starting Slide (0 index)
-		directionNav:false,
-		directionNavHide:false, //Only show on hover
-		controlNav:false, //1,2,3...
-		controlNavThumbs:false, //Use thumbnails for Control Nav
-		pauseOnHover:true, //Stop animation while hovering
-		manualAdvance:false, //Force manual transitions
-		captionOpacity:0.8, //Universal caption opacity
-		beforeChange: function(){},
-		afterChange: function(){},
-		slideshowEnd: function(){} //Triggers after all slides have been shown
-	});
-});
-</script>
+	<?php include 'scripts/meta.php' ?>
+	<?php include 'scripts/css.php' ?>
+	<?php include 'scripts/js.php' ?>
 </head>
 
 <body>

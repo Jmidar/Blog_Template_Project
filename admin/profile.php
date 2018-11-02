@@ -62,7 +62,7 @@
                           <label>Username:</label>
                       </td>
                       <td>
-                          <input type="text" name="username" value = "<?php echo $result['username']; ?>" class="medium" />
+                          <input type="text" name="username" readonly value = "<?php echo $result['username']; ?>" class="medium" />
                       </td>
                   </tr>
 
