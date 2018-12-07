@@ -1,57 +1,57 @@
 <?php include 'inc/header.php' ?>
 <?php include 'inc/sidebar.php' ?>
-<?php
-    if (!isset($_GET['catid']) || $_GET['catid'] == NULL){
-        echo "<script>window.location = 'catlist.php';</script>";
-        //header("Location:catlist.php");
-    } else{
-        $id = $_GET['catid'];
-    }
-?>
+
+
         <div class="grid_10">
         
             <div class="box round first grid">
-                <h2>Update Category</h2>
+                <h2>Update Theme</h2>
                <div class="block copyblock"> 
         <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-                $name = $_POST['name'];
-                $name = mysqli_real_escape_string($db->link, $name);
+                
+                $theme = mysqli_real_escape_string($db->link, $_POST['theme']);
                // echo "<span style='color: red;font-size: 18px;'>No Result Found...!!!</span>";
-                if (empty($name)){
-                    echo "<span style='color: red;font-size: 18px;'>Your Field is Empty...!!!</span>";
-                } else {
-                    $query = "UPDATE tbl_category
+            
+                    $query = "UPDATE tbl_theme
                               SET
-                              name = '$name'
-                              WHERE id = $id
-                            ";
+                              theme = '$theme'
+                              WHERE id = '1'";
                     $updated_row = $db->update($query);
 
                     if ($updated_row){
-                        echo "<span style='color: green;font-size: 18px;'>Category Updated Successfully...</span>";
+                        echo "<span style='color: green;font-size: 18px;'>Theme Updated Successfully...</span>";
                     } else {
-                        echo "<span style='color: red;font-size: 18px;'>Category not Updated...!!!</span>";
+                        echo "<span style='color: red;font-size: 18px;'>Theme not Updated...!!!</span>";
                     }
-                }
 
             }
         ?>
 
-        <?php /*
-            $query = "select * from tbl_category where id=$id order by id desc";
-            $category = $db->select($query);
-            if ($category){
-             while ($result = $category->fetch_assoc()) {
+        <?php 
+            $query = "select * from tbl_theme where id='1'";
+            $theme = $db->select($query);
+             while ($result = $theme->fetch_assoc()) {
                  
-             */
+             
         ?>
                  <form action="" method="post">
                     <table class="form">                    
                         <tr>
                             <td>
-                                <input type="text" name="name" value="<?php echo $result['name']; ?>" class="medium" />
+                                <input <?php if ($result['theme'] == 'default') {echo "checked"; }?>
+                                 type="radio" name="theme" value="default" />Default
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input <?php if ($result['theme'] == 'green') {echo "checked"; }?> type="radio" name="theme" value="green" />Green
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input <?php if ($result['theme'] == 'red') {echo "checked"; }?> type="radio" name="theme" value="red" />Red
                             </td>
                         </tr>
                         <tr> 
@@ -61,7 +61,7 @@
                         </tr>
                     </table>
                     </form>
-            <?php /* } } */ ?>
+            <?php  }  ?>
                 </div>
             </div>
         </div>
