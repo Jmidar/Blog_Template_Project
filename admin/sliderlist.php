@@ -19,11 +19,11 @@
 					<tbody>
 
 				   <?php
-                  	$query = "SELECT tbl_slider.*, tbl_category.name FROM tbl_post INNER JOIN tbl_category ON tbl_post.cat = tbl_category.id ORDER By tbl_post.title desc";
-                  	$post = $db->select($query);
-                  	if ($post){
+                  	$query = "SELECT * from tbl_slider";
+                  	$slider = $db->select($query);
+                  	if ($slider){
                   		$i = 0;
-                  		while ($result = $post->fetch_assoc()) {
+                  		while ($result = $slider->fetch_assoc()) {
                   			$i++;
                   	
                   ?>
@@ -35,11 +35,11 @@
 			<td> 
 
 			<?php if (Session::get('userRole') == '0') { ?>			
-				<a href="editpost.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
+				<a href="editslider.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
 				||		
 
 				<a onclick="return confirm('Are you sure to Delete...???');"
-								 href="delpost.php?delpostid=<?php echo $result['id']; ?>">Delete</a>
+								 href="delslide.php?delpostid=<?php echo $result['id']; ?>">Delete</a>
 			<?php } ?>
 			</td>
 		</tr>
