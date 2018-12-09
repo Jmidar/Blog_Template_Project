@@ -35,11 +35,11 @@
 			<td> 
 
 			<?php if (Session::get('userRole') == '0') { ?>			
-				<a href="editslider.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
+				<a href="editslider.php?sliderid=<?php echo $result['id']; ?>">Edit</a> 
 				||		
 
 				<a onclick="return confirm('Are you sure to Delete...???');"
-								 href="delslide.php?delpostid=<?php echo $result['id']; ?>">Delete</a>
+								 href="delslide.php?slideid=<?php echo $result['id']; ?>">Delete</a>
 			<?php } ?>
 			</td>
 		</tr>
