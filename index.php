@@ -18,7 +18,7 @@
 
 
 			<?php
-				$query = "select * from tbl_post limit $start_form, $per_page";
+				$query = "select * from tbl_post order by id desc limit $start_form, $per_page";
 				$post = $db->select($query);
 				//var_dump($query);
 
