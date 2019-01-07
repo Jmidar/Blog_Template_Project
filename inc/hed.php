@@ -14,8 +14,6 @@
 	<?php include 'scripts/meta.php' ?>
 	<?php include 'scripts/css.php' ?>
 	<?php include 'scripts/js.php' ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">        </script>
-     <script src="typeahead.min.js"></script>
 </head>
 
 <body>
@@ -41,10 +39,12 @@
 				<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
 				<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
 			</div>
+
+
 			
 			<div class="searchbtn clear">
 			<form action="search.php" method="get">
-				<input type="text" name="typeahead" placeholder="Search keyword..."/>
+				<input type="text" name="search" placeholder="Search keyword..."/>
 				<input type="submit" name="submit" value="Search"/>
 			</form>
 			</div>
@@ -56,7 +56,7 @@
 		$titlepage = basename($path, '.php');
 	?>
 	<ul>
-		<li><a <?php if($titlepage == 'index'){ echo 'id = "active"'; }?> href="index.php">Home</a></li>
+		<li><a <?php if($titlepage == 'index'){ echo 'id = "active"'; }?> href="index1.php">Home</a></li>
         
 				<?php
 				    $query = "SELECT * FROM tbl_page";

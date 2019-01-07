@@ -1,103 +1,92 @@
-<?php include 'inc/header.php'; ?>
-<?php include 'inc/slider.php'; ?>	
+<?php include 'inc/hed.php'; ?>
+<?php include 'inc/slider.php'; ?>
+	<div class="lol clear">	
+
+				<tr>
+                            <td>
+                                <label>Select your Location:</label>
+                            </td>
+                            <td>
+                                <select id="select" name="cat">
+                                    <option>Select Category</option>
+                              <?php
+                                $query = "SELECT * FROM tbl_category";
+                                $category = $db->select($query);
+                                 if ($category){
+                                    while ($result = $category->fetch_assoc()) {
+                                         
+                              ?>
+                                    <option value="<?php echo $result['id'] ?>"><?php echo $result['name']; ?></option>
+                              <?php  } } ?>
+                                </select>
+                            </td>
+                        </tr>
+  </div>
 
 	<div class="contentsection contemplete clear">
+
+
+
 		<div class="maincontent clear">
+
+			<!--pagination -->
+			<?php
+				$per_page = 3;
+				if(isset($_GET["page"])){
+					$page = $_GET["page"];
+				}else{
+					$page = 1;
+				}
+				$start_form = ($page-1) * $per_page;
+
+			?>
+
+
+			<?php
+				$query = "select * from tbl_post order by id desc limit $start_form, $per_page";
+				$post = $db->select($query);
+				//var_dump($query);
+
+				if ($post) {
+					while ($result = $post->fetch_assoc()) {
+
+					
+
+			?>
 			<div class="samepost clear">
-				<h2><a href="">Our post title here</a></h2>
-				<h4>April 10, 2016, 12:30 PM, By <a href="#">Delowar</a></h4>
-				 <a href="#"><img src="images/post1.jpg" alt="post image"/></a>
-				<p>
-					Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.
-				</p>
+				<h2><a href=" post.php?id=<?php echo $result['id'];?>"><?php echo $result['title'];?></a></h2>
+				<h4><?php echo $fm->formatDate($result['date']); ?>,  By <a href = "#"><?php echo $result['author'];?></a></h4>
+
+				<a href = "#"><img src="admin/<?php echo $result['image']; ?>" alt="post image"/></a>
+
+				<?php echo $fm->textShorten($result['body']); ?>
 				<div class="readmore clear">
-					<a href="post.html">Read More</a>
+
+					<a href = "post.php?id=<?php echo $result['id']; ?>">Read More</a>
 				</div>
-			</div>
-			<div class="samepost clear">
-				<h2><a href="">Our post title here</a></h2>
-				<h4>April 10, 2016, 12:30 PM, By <a href="#">Delowar</a></h4>
-				 <img src="images/post2.png" alt="post image"/>
-				<p>
-					Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.
-				</p>
-				<div class="readmore clear">
-					<a href="post.html">Read More</a>
-				</div>
-			</div>
-			<div class="samepost clear">
-				<h2>Our post title here</h2>
-				<h4>April 10, 2016, 12:30 PM, By <a href="#">Delowar</a></h4>
-				 <img src="images/post1.jpg" alt="post image"/>
-				<p>
-					Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here. Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.Some text will be go here.
-				</p>
-				<div class="readmore clear">
-					<a href="post.html">Read More</a>
-				</div>
-			</div>
+		</div>
+		<?PHP } ?>
+		<?php 
+		$query = "select * from tbl_post";
+		$result = $db->select($query);
+		$total_rows = mysqli_num_rows($result);
+		$total_pages = ceil($total_rows/$per_page);
+	    
+	    echo "<span class='pagination'><a href='index1.php?page=1'>".'First Page'."</a>";
+		for ($i=1; $i <= $total_pages; $i++){
+
+			echo "<a href='index1.php?page=".$i."'>".$i."</a>";
+		};
+
+		echo "<a href='index1.php?page=$total_pages'>".'Last Page'."</a></span>"?>
+
+		 <?php
+		 	} else {
+		 		header("Location:404.php");
+		 	}
+		 ?>
 
 		</div>
-		<div class="sidebar clear">
-			<div class="samesidebar clear">
-				<h2>Categories</h2>
-					<ul>
-						<li><a href="#">Category One</a></li>
-						<li><a href="#">Category Two</a></li>
-						<li><a href="#">Category Three</a></li>
-						<li><a href="#">Category Four</a></li>
-						<li><a href="#">Category Five</a></li>						
-					</ul>
-			</div>
-			
-			<div class="samesidebar clear">
-				<h2>Latest articles</h2>
-					<div class="popular clear">
-						<h3><a href="#">Post title will be go here..</a></h3>
-						<a href="#"><img src="images/post1.jpg" alt="post image"/></a>
-						<p>Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.</p>	
-					</div>
-					
-					<div class="popular clear">
-						<h3><a href="#">Post title will be go here..</a></h3>
-						<a href="#"><img src="images/post1.jpg" alt="post image"/></a>
-						<p>Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.</p>	
-					</div>
-					
-					<div class="popular clear">
-						<h3><a href="#">Post title will be go here..</a></h3>
-						<a href="#"><img src="images/post1.jpg" alt="post image"/></a>
-						<p>Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.</p>	
-					</div>
-					
-					<div class="popular clear">
-						<h3><a href="#">Post title will be go here..</a></h3>
-						<a href="#"><img src="images/post1.jpg" alt="post image"/></a>
-						<p>Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.Sidebar text will be go here.</p>	
-					</div>
-	
-			</div>
-			
-		</div>
-	</div>
 
-	<div class="footersection templete clear">
-	  <div class="footermenu clear">
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Contact</a></li>
-			<li><a href="#">Privacy</a></li>
-		</ul>
-	  </div>
-	  <p>&copy; Copyright Training with live project.</p>
-	</div>
-	<div class="fixedicon clear">
-		<a href="http://www.facebook.com"><img src="images/fb.png" alt="Facebook"/></a>
-		<a href="http://www.twitter.com"><img src="images/tw.png" alt="Twitter"/></a>
-		<a href="http://www.linkedin.com"><img src="images/in.png" alt="LinkedIn"/></a>
-		<a href="http://www.google.com"><img src="images/gl.png" alt="GooglePlus"/></a>
-	</div>
-<script type="text/javascript" src="js/scrolltop.js"></script>
-</body>
-</html>
+<?php include 'inc/sidebar.php'; ?>
+<?php include 'inc/footer.php'; ?>

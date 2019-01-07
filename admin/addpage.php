@@ -18,14 +18,10 @@
 
                     echo "<span style='color: red;font-size: 18px;'>Field must not be Empty...!!!</span>";
                  } else{
-                     $query = "UPDATE tbl_page
-                              SET
-                              name = '$name',
-                              body = '$body'
-                              WHERE id = $id
-                            ";
-                     $updated_row = $db->update($query);
-                      if ($updated_row) {
+                     $query = "INSERT INTO tbl_page(name,body) 
+                                VALUES('$name','$body')";
+                     $inserted_row = $db->INSERT($query);
+                      if ($inserted_row) {
                       echo "<span class='success'>Page created Successfully.
                       </span>";
                       }else {

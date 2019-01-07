@@ -2,7 +2,61 @@
 <?php include 'inc/slider.php'; ?>	
 
 	<div class="contentsection contemplete clear">
-		<div class="maincontent clear">
+
+		<div class="maincontent clear">	
+		
+				<tr>
+                            <td>
+                                <label>Select your Location:</label>
+                            </td>
+                            <td>
+                                <select id="select" name="cat">
+                                    <option>Select Location</option>
+                              <?php
+                                $query = "SELECT * FROM tbl_Location";
+                                $location = $db->select($query);
+                                 if ($location){
+                                    while ($result = $location->fetch_assoc()) {
+                                         
+                              ?>
+                                    <option value="<?php echo $result['id'] ?>"><?php echo $result['name']; ?></option>
+                              <?php  } } ?>
+                                </select>
+                              	
+                            </td>
+                        </tr>
+            
+            
+
+                        <tr style="margin-right: 100px;">
+                        	<td>  </td>
+                            <td>
+                                <label>. 	 Select Range Price:</label>
+                            </td>
+                            <td>
+                                <select id="select" name="cat">
+                                    <option>Select Range</option>
+                              <?php
+                                $query = "SELECT * FROM tbl_price";
+                                $category = $db->select($query);
+                                 if ($category){
+                                    while ($result = $category->fetch_assoc()) {
+                                         
+                              ?>
+                                    <option value="<?php echo $result['id'] ?>"><?php echo $result['amount']; ?></option>
+                              <?php  } } ?>
+                                </select>
+                            </td>
+                        </tr>
+               
+  </div>
+
+  <div class="sidebar clear">
+  	<h2 style="text-align: center;">Find Your Home</h2>
+  </div>
+
+
+	<div class="maincontent clear">
 
 			<!--pagination -->
 			<?php

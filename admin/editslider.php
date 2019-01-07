@@ -85,7 +85,7 @@ $getslider = $db->select($query);
     }
   }
  ?>
-          <div class="block">               
+          <div class="block">                
            <form action="editslider.php" method="post" enctype="multipart/form-data">
               <table class="form">
                  

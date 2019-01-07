@@ -43,6 +43,18 @@
                                 <li><a href="postlist.php">Post List</a> </li>
                             </ul>
                         </li>
+                        <li><a class="menuitem">Location</a>
+                            <ul class="submenu">
+                                <li><a href="addloc.php">Add Location</a> </li>
+                                <li><a href="loclist.php">Location List</a> </li>
+                            </ul>
+                        </li>
+                        <li><a class="menuitem">Amount</a>
+                            <ul class="submenu">
+                                <li><a href="addamount.php">Add Amount</a> </li>
+                                <li><a href="amountlist.php">Amount List</a> </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
